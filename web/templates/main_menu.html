@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ライフサポートシステム</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">   
+    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/fetch.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script> 
+</head>
+<body class="main_menu">
+    <div class="header">
+        ライフサポートシステム
+    </div>
+    <div class="container">
+        <div class="button_hover">
+            <a href="#">世帯主新規登録</a>
+            <a href="#">世帯主検索</a>
+            <a href="#">各表出力</a>
+            <a href="#">ログイン管理</a>
+            <a href="#">住居情報</a>
+            <a href="#">組長情報</a>
+            <a href="#">班長情報</a>
+            <a href="#">バックアップ</a>
+            <a href="#">ログアウト</a>                     
+        </div>
+        <!-- 右側のメインコンテンツ -->
+        <div class="main-content">
+            <div class="list-view">
+                <div class="filter-container">
+                    <input type="text" id="nameFilter" placeholder="氏名で絞り込み" oninput="filterTable()">
+                    <input type="text" id="addressFilter" placeholder="住居表示で絞り込み" oninput="filterTable()">
+                </div>
+                <table id="listTable" data-sort-order="asc">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">No</th>
+                            <th onclick="sortTable(1)">氏名</th>
+                            <th onclick="sortTable(2)">住居表示</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}                       
+                        <tr onclick="fetchDetails('{{ row[0] }}')">
+                            <td>{{ row[0] }}</td> <!-- NO_id -->
+                            <td>{{ row[1] }}</td> <!-- Name -->
+                            <td>{{ row[2] }}</td> <!-- Group_Kbn -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="container_sub">
+                <div class="section" style="border: 2px solid #FFC1CC;">
+                    <h2>1. 個人情報</h2>
+                    <div class="form-group">
+                        <label>氏名: </label>
+                        <input type="text" id="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>代表名: </label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>電話番号: </label>
+                        <input type="tel" id="PN">
+                    </div>
+                </div>
+                <div class="section" style="border: 2px solid #AFCBFF;">
+                    <h2>2. 住所関連</h2>
+                    <div class="form-group">
+                        <label>住居表示: </label>
+                        <input type="text" id="Group_Kbn">
+                    </div>
+                    <div class="form-group">
+                        <label>住宅区分: </label>
+                        <select id="residence_No" name="options">
+                            {% for residence in residence_data %}
+                            <option value="{{ residence[0] }}">{{ residence[1] }}</option>
+                            {% endfor %}
+                        </select>    
+                    </div>            
+                    <div class="form-group">
+                        <label>住所1: </label>
+                        <input type="text" id="Address1">
+                    </div>
+                    <div class="form-group">
+                        <label>住所2（共同住宅名）: </label>
+                        <input type="text" id="Address2">
+                    </div>
+                    <div class="form-group">
+                        <label>部屋番号: </label>
+                        <input type="text" id="RN">
+                    </div>
+                </div>
+                <div class="section" style="border: 2px solid #C4F4D1;">
+                    <h2>3. 住宅統計</h2>
+                    <div class="form-group">
+                        <label>戸建世帯数: </label>
+                        <input type="text" id="Num_Detache">
+                    </div>
+                    <div class="form-group">           
+                        <label>共同住宅世帯数: </label>
+                        <input type="text" id="Num_Apart">
+                    </div>
+                    <div class="form-group">
+                        <label>共同住宅棟数: </label>
+                        <input type="text" id="Num_build">
+                    </div>
+                </div>
+            </div>
+            <div class="container_sub">
+                <div class="section" style="border: 2px solid #FFF4B1;">
+                    <h2>4. 住民構成</h2>
+                    <div class="form-group">
+                        <label>総人数: </label>
+                        <input type="text" id="Num_Total">
+                    </div>
+                    <div class="form-group">
+                        <label>代表区分: </label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>うち75歳以上: </label>
+                        <input type="text" id="Num_75old">
+                    </div>
+                    <div class="form-group">
+                        <label>うち未就学児: </label>
+                        <input type="text" id="Num_PS">
+                    </div>
+                </div>
+                <div class="section" style="border: 2px solid #E3D6FF;">
+                    <h2>5. 支払い関連</h2>
+                    <div class="form-group">
+                        <label>支払区分: </label>
+                        <select id="Pay_Kbn" name="options" >
+                            {% for pay in pay_data %}
+                            <option value="{{ pay[0] }}">{{ pay[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>月単価: </label>
+                        <input type="text" id="Month_price">
+                    </div>
+                    <div class="form-group">
+                        <label>集金合計金額: </label>
+                        <input type="text" id="Year_Price">
+                    </div>
+                    <div class="form-group">
+                        <label>振込: </label>
+                        <input type="checkbox" style="transform: scale(1.5);" id="Transfer_Flg">
+                    </div>
+                </div>
+                <div class="section" style="border: 2px solid #FFD6A5;">
+                    <h2>6. その他</h2>
+                    <div class="form-group">
+                        <label>ライフサポートマップ: </label>
+                        <input type="checkbox" style="transform: scale(1.5);">                        
+                    </div>
+                    <div class="form-group">
+                        <label>転出期間: </label>
+                        <input type="text" id="Move_Out">
+                    </div>
+                    <div class="form-group">
+                        <label>集金者: </label>
+                        <select id="Collector_Kbn" name="options">
+                            {% for CM in CM_data %}
+                            <option value="{{ CM[0] }}">{{ CM[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>保留理由: </label>
+                        <select id="HoldPrice_Kbn" name="options">
+                            {% for hold in hold_data %}
+                            <option value="{{ hold[0] }}">{{ hold[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>備考: </label>
+                        <textarea placeholder="複数行のテキストを入力してください" id="Remarks"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

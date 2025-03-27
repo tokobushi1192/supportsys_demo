@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メニューとリストビュー</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 80%;
+            margin: auto;
+        }
+        .container_sub {
+            
+            display: flex; /* 横並びにする */
+            flex-wrap: wrap; /* 画面が狭い場合に折り返す */
+            gap: 5px; /* セクション間の余白 */
+        
+        }
+        .section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+
+            width: 28%; /* 各セクションの幅を調整 */
+            box-sizing: border-box; /* パディングを含めて幅を計算 */            
+
+        }
+        .section h2 {
+            margin: 0;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        .form-group {
+            display: flex;
+            /*padding: 20px;*/
+            align-items: center;
+        }
+        .form-group label {
+            width: 20%;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            flex-grow: 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .required {
+            color: red;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        label {
+              padding: 10px; /* 全方向に5pxの空白を追加 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container_sub">
+            <div class="section" style="border: 2px solid #FFC1CC;">
+                <h2>1. 個人情報</h2>
+                <div class="form-group">
+                    <label>氏名: </label>
+                    <input type="text" >
+                </div>
+                <div class="form-group">
+                    <label>代表名: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>電話番号: </label>
+                    <input type="tel">
+                </div>
+            </div>
+            <div class="section" style="border: 2px solid #AFCBFF;">
+                <h2>2. 住所関連</h2>
+                <div class="form-group">
+                    <label>住居表示: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>住宅区分: </label>
+                    <input type="text">
+                </div>            
+                <div class="form-group">
+                    <label>住所1: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>住所2（共同住宅名）: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>部屋番号: </label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="container_sub">
+            <div class="section" style="border: 2px solid #C4F4D1;">
+                <h2>3. 住宅統計</h2>
+                <div class="form-group">
+                    <label>戸建世帯数: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">           
+                    <label>共同住宅世帯数: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>共同住宅棟数: </label>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="section" style="border: 2px solid #FFF4B1;">
+                <h2>4. 住民構成</h2>
+                <div class="form-group">
+                    <label>総人数: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>代表区分: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>うち75歳以上: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>うち未就学児: </label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="container_sub">        
+            <div class="section" style="border: 2px solid #E3D6FF;">
+                <h2>5. 支払い関連</h2>
+                <div class="form-group">
+                    <label>支払区分: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>月単価: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>振込: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>集金合計金額: </label>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="section" style="border: 2px solid #FFD6A5;">
+                <h2>6. その他</h2>
+                <div class="form-group">
+                    <label>ライフサポートマップ: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>転出期間: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>集金者: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>保留理由: </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>備考: </label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
