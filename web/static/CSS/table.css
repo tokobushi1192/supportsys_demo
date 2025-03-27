@@ -1,0 +1,60 @@
+/* メインメニューリストテーブル */
+.list-view {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+.list-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.list-view th, .list-view td {
+    border: 1px solid #ddd;
+    /*padding: 10px;*/
+    padding: 8px;   
+    text-align: left;
+}
+.list-view th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+.list-view tbody {
+    display: block;
+    max-height: 300px; /* 10件分の高さに調整 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
+    overflow-x: hidden; 
+}
+
+.list-view thead, .list-view tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* 列幅を固定 */
+}
+
+.list-view thead {
+    width: calc(100% - 1em); /* スクロールバーの幅を考慮 */
+}
+
+.selected-row {
+    background-color: #f0f8ff; 
+}
+
+.filter-container {
+    margin-bottom: 15px;
+}
+.filter-container input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.sidebar {
+    width: 250px; /* サイドバーの幅を固定 */
+    background: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow-y: auto;
+}
+/* その他のテーブル */

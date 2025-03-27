@@ -1,0 +1,43 @@
+/* メインメニュー */
+.button_hover {
+    display: flex;
+    flex-direction: column; /* ボタンを縦に並べる */
+    gap: 10px; /* ボタン間の余白を設定 */
+    align-items: center; /* ボタンを中央揃え */
+}
+.button_hover a {
+    background: #007766;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; /* ボタンの幅を統一 */
+    padding: 10px 0; /* 高さを統一 */
+    margin: 0 auto;
+    max-width: 280px;
+    color: #ffffff;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    text-decoration: none; /* 下線を消す */
+}
+.button_hover a:hover {
+    background: #00CCAD;
+    color: #313131;
+}
+.button_hover a:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #313131;
+    border-right: 3px solid #313131;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+}
+.button_hover a:hover:after {
+    border-color: #FFF;
+}
